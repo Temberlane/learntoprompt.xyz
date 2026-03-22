@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+*.egg
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+*.db
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+
+# Env files
+.env
+.env.*
