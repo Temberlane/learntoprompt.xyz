@@ -1,3 +1,4 @@
+import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -7,10 +8,15 @@ from app.database import get_db, Base, engine
 from app.models import Prompt
 from app.schemas import PromptCreate, PromptRead
 
+logger = logging.getLogger(__name__)
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        logger.warning("Database not available at startup: %s", e)
     yield
 
 
